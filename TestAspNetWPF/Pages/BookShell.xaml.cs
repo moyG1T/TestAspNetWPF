@@ -26,15 +26,13 @@ namespace TestAspNetWPF.Pages
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            bookViewModel.SelectedBook = (Book)button.DataContext;
+            bookViewModel.SelectedBook = (sender as Button).DataContext as Book;
             NavigationService.Navigate(new AddBook(bookViewModel));
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            bookViewModel.Books.Remove((Book)button.DataContext);
+            bookViewModel.Books.Remove((sender as Button).DataContext as Book);
         }
     }
 }

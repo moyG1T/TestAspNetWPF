@@ -47,6 +47,12 @@ namespace TestAspNetWPF.Pages
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
+            if (bookViewModel.SelectedBook.Id == 0)
+            {
+                CostBox.Text = "";
+                PageCountBox.Text = "";
+            }
+
             TitleBox.CaretIndex = TitleBox.Text.Length;
             TitleBox.ScrollToEnd();
 
@@ -60,6 +66,17 @@ namespace TestAspNetWPF.Pages
             PageCountBox.ScrollToEnd();
 
             TitleBox.Focus();
+        }
+
+        private void AddBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (bookViewModel.SelectedBook.Id == 0)
+            {
+                bookViewModel.Books.Add(bookViewModel.SelectedBook);
+            }
+
+            NavigationService.GoBack();
+            bookViewModel.SelectedBook = null;
         }
     }
 }

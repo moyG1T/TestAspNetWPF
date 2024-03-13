@@ -2,22 +2,41 @@
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using System.Collections.Generic;
 
 namespace TestAspNetWPF.Components
 {
     public class HttpClientBook
     {
+        private string url = @"http://localhost:5008";
+        public List<Book> GetAllBooks()
+        {
+            return ConvertFromJson<List<Book>>(GetRequestAsync(url + "bookitems"));
+        }
+
+        public Book GetBookId(int id)
+        {
+            return ConvertFromJson<Book>(GetRequestAsync(url + $"/bookitem/{id}"));
+        }
+
+        public void AddBook(Book book)
+        {
+            PostRequestAsync(url + $"/bootitem", book);
+        }
+
         private T ConvertFromJson<T>(string json)
         {
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-        private void GetRequestAsync(string url)
+        private string GetRequestAsync(string url)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(url);
 
-            client.GetAsync(url);
+            var response = client.GetAsync(url).Result;
+
+            return response.Content.ReadAsStringAsync().Result;
         }
 
         private async void PostRequestAsync(string url, Book book)
