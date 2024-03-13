@@ -12,16 +12,14 @@ namespace TestAspNetWPF.ViewModels
         {
             Books = new ObservableCollection<Book>()
             {
-                new Book() {Id = 0, Author="asd", Cost = 123, PageCount = 123, Title = "qwe"},
-                new Book() {Id = 0, Author="asd", Cost = 123, PageCount = 123, Title = "qwe"},
-                new Book() {Id = 0, Author="asd", Cost = 123, PageCount = 123, Title = "qwe"},
+                new Book() {Id = 123, Author="asd", Title ="qwe", Cost=123,PageCount=32},
             };
         }
 
         private Book selectedBook;
         public Book SelectedBook
         {
-            get => selectedBook;
+            get => selectedBook ?? new Book();
             set
             {
                 selectedBook = value;
@@ -29,16 +27,8 @@ namespace TestAspNetWPF.ViewModels
             }
         }
 
-        private IEnumerable<Book> books;
-        public IEnumerable<Book> Books
-        {
-            get => books;
-            set
-            {
-                books = value;
-                OnPropertyChanged(nameof(Books));
-            }
-        }
+        public ObservableCollection<Book> Books { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string property = "")

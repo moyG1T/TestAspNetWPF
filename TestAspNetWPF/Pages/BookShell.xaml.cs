@@ -19,19 +19,22 @@ namespace TestAspNetWPF.Pages
             DataContext = bookViewModel;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddBook(new Book()));
+            NavigationService.Navigate(new AddBook(bookViewModel));
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddBook(BookList.SelectedItem as Book));
+            Button button = sender as Button;
+            bookViewModel.SelectedBook = (Book)button.DataContext;
+            NavigationService.Navigate(new AddBook(bookViewModel));
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Удалить
+            Button button = sender as Button;
+            bookViewModel.Books.Remove((Book)button.DataContext);
         }
     }
 }

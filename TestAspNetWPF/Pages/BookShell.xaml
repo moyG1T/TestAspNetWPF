@@ -14,7 +14,7 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="1" Click="Button_Click">
+        <Button Grid.Column="1" Click="Add_Click">
             <TextBlock Text="Добавить">
                 <TextBlock.LayoutTransform>
                     <RotateTransform Angle="90"></RotateTransform>

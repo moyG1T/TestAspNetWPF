@@ -8,13 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddBook">
 
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="0" Click="Button_Click">
+        <Button Grid.Column="0" Click="Back_Click">
             <TextBlock Text="Назад">
                 <TextBlock.LayoutTransform>
                     <RotateTransform Angle="270"></RotateTransform>
@@ -26,19 +26,19 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Название"/>
-                    <TextBox Text="{Binding Title}"/>
+                    <TextBox x:Name="TitleBox" Text="{Binding Title}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Автор"/>
-                    <TextBox Text="{Binding Author}"/>
+                    <TextBox x:Name="AuthorBox" Text="{Binding Author}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Кол-во страниц"/>
-                    <TextBox Text="{Binding PageCount}"/>
+                    <TextBox x:Name="PageCountBox" Text="{Binding PageCount}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Цена"/>
-                    <TextBox Text="{Binding Cost}"/>
+                    <TextBox x:Name="CostBox" Text="{Binding Cost}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 </StackPanel>
             </StackPanel>
         </Border>

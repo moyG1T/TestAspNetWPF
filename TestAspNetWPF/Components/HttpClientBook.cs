@@ -12,12 +12,12 @@ namespace TestAspNetWPF.Components
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-        private async void GetRequestAsync(string url)
+        private void GetRequestAsync(string url)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(url);
 
-            await client.GetAsync(url);
+            client.GetAsync(url);
         }
 
         private async void PostRequestAsync(string url, Book book)

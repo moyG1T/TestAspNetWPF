@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TestAspNetWPF.Components;
+using TestAspNetWPF.ViewModels;
 
 namespace TestAspNetWPF.Pages
 {
@@ -21,18 +22,44 @@ namespace TestAspNetWPF.Pages
     /// </summary>
     public partial class AddBook : Page
     {
-        private Book book;
-        public AddBook(Book _book)
+        private BookViewModel bookViewModel;
+        public AddBook(BookViewModel _bookViewModel)
         {
             InitializeComponent();
 
-            book = _book;
-            DataContext = book;
+            bookViewModel = _bookViewModel;
+            DataContext = bookViewModel.SelectedBook;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+            bookViewModel.SelectedBook = null;
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            TitleBox.CaretIndex = TitleBox.Text.Length;
+            TitleBox.ScrollToEnd();
+
+            AuthorBox.CaretIndex = AuthorBox.Text.Length;
+            AuthorBox.ScrollToEnd();
+
+            CostBox.CaretIndex = CostBox.Text.Length;
+            CostBox.ScrollToEnd();
+
+            PageCountBox.CaretIndex = PageCountBox.Text.Length;
+            PageCountBox.ScrollToEnd();
+
+            TitleBox.Focus();
         }
     }
 }
